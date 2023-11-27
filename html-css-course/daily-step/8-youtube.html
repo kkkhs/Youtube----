@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>YouTube.com Clone</title>
+    <style>
+      .search-bar{
+        font-size: 20px;
+        margin-left: 12px;
+          /*内联元素 转换成 块级元素*/
+        display: block;
+      }
+      .thumbnail{
+        width: 300px;
+      }
+
+      .video-title{
+        width: 300px;
+      }
+
+      /* 8d */
+      .d-1{
+        padding-left: 10px;
+        border: 1px;
+        border-style: solid;
+        border-color: rgba(0, 0, 0, 0.15);
+        margin-bottom: 5px;
+        width: 92px;
+        margin-right: 1px;
+        border-radius: 5px;
+        height: 25px;
+      }
+      .d-2{
+        padding-left: 10px;
+        border: 1px;
+        border-style: solid;
+        border-color: rgba(63, 46, 46, 0.15);
+        margin-bottom: 5px;
+        width: 92px;
+        margin-left: 0px;
+        border-radius: 5px;
+        height: 25px;
+      }
+      .d-3{
+        padding-left: 10px;
+        width: 205px;
+        border: 1px;
+        border-style: solid;
+        border-color: rgba(0, 0, 0, 0.15);
+        display: block;
+        margin-bottom: 5px;
+        border-radius: 5px;
+        height: 25px;
+      }
+      .d-4{
+        font-weight: bold;
+        border: none;
+        text-align: center;
+        background-color: rgb(32, 162, 223);
+        width: 220px;
+        border-radius: 10px;
+        color: white;
+        height: 40px;
+      }
+      /* 8e */
+      .e-p{
+        font-weight: bold;
+        font-size: 30px;
+        margin-top: 5px;
+        margin-bottom: 15px;
+      }
+      .e-in1{
+        display: block;
+        height: 35px;
+        width: 300px;
+        border-radius: 4px;
+        margin-bottom: 5px;
+        padding-left: 10px;
+        border: none;
+        background-color: rgba(0, 0, 0, 0.15);
+      }
+      .e-in2{
+        display: block;
+        height: 35px;
+        width: 300px;
+        border-radius: 4px;
+        margin-bottom: 25px;
+        padding-left: 10px;
+        border: none;
+        background-color: rgba(0, 0, 0, 0.15);
+      }
+      .e-bu1{
+        border: none;
+        background-color: black;
+        color: white;
+        height: 35px;
+        width: 100px;
+        vertical-align: middle;
+        margin-right: 15px;
+      }
+      .e-bu2{
+        border: none;
+        background-color: rgba(0, 0, 0, 0.15);
+        color: black;
+        height: 35px;
+        width: 100px;
+        vertical-align: middle;
+        width: 150px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- 内联元素 -->
+    <input class="search-bar" type="text" placeholder="Search">
+    <img class="thumbnail" src="thumbnails/thumbnail-1.webp" alt="">
+    <!-- 块级元素 -->
+    <p class="video-title">
+      Talking Tech and AI with Google CEO Sundar Pichai!
+    </p>
+
+    <p class="video-author">
+      Marques Brownlee
+    </p>
+
+    <p class="video-stats">
+      3.4M views · 6 months ago
+    </p>
+
+    <!-- 8d -->
+    <hr>
+    <input class="d-1" type="text" placeholder="First name">
+    <input class="d-2" type="text" placeholder="First name">
+    <input class="d-3" type="text" placeholder="Email">
+    <button class="d-4">Sign Up</button>
+
+    <!-- 8e -->
+    <hr>
+    <p class="e-p">Request a ride now</p>
+    <input class="e-in1" type="text" placeholder="Enter pickup location">
+    <input class="e-in2" type="text" placeholder="Enter destination">
+    <button class="e-bu1">Request now</button>
+    <button class="e-bu2">Schedule for later</button>
+    
+  </body>
+</html>

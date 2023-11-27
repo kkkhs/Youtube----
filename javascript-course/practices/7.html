@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculator</title>
+</head>
+<body>
+  <!-- 7g -->
+  <p>Calculator</p>
+  <p>
+    <button onclick="calculate('1');">1</button>
+    <button onclick="calculate('2');">2</button>
+    <button onclick="calculate('3');">3</button>
+    <button onclick="calculate(' + ');">+</button>
+  </p>
+  <p>
+    <button onclick="calculate('4');">4</button>
+    <button onclick="calculate('5');">5</button>
+    <button onclick="calculate('6');">6</button>
+    <button onclick="calculate(' - ');">-</button>
+  </p>
+  <p>
+    <button onclick="calculate('7');">7</button>
+    <button onclick="calculate('8');">8</button>
+    <button onclick="calculate('9');">9</button>
+    <button onclick="calculate(' * ');">*</button>
+  </p>
+  <p>
+    <button onclick="calculate('0');">0</button>
+    <button onclick="calculate('.');">.</button>
+    <button onclick="calculation = eval(calculation); console.log(calculation)">=</button>
+    <button onclick="calculate(' / ');">/</button>
+  </p>
+  <button onclick="calculation = '';">clear</button>
+
+  <hr>
+
+  <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Variables</title>
+</head>
+<body>
+  <p>Cart Quantity</p>
+  <button onclick="console.log(`the quantity is: ${num}`)">Show Quantity</button>
+  <!-- 6k -->
+  <button onclick="
+    updateCartQuantity(1);
+  ">
+    Add to Cart
+  </button>
+
+  <button onclick="
+    updateCartQuantity(2);
+  ">
+    +2
+  </button>
+  <button onclick="
+    updateCartQuantity(3);
+  ">
+    +3
+  </button>
+
+  <!-- 6i -->
+  <button onclick="
+   updateCartQuantity(-2);
+  ">
+    -2
+  </button>
+
+  <button onclick="
+    updateCartQuantity(-3);
+  ">
+    -3
+  </button>
+  <button onclick="num = 0; console.log('the quantity had reset!')" >Reset Cart</button>
+
+  <script>
+    let num = 0;
+  </script>
+</body>
+</html>
+
+  <script>
+    let calculation = '';
+
+    function calculate(x){
+      calculation += x;
+    }
+
+    function updateCartQuantity(a){
+      if(a < 0){
+        if(num + a >= 0){
+          num += a; 
+          console.log(`the quantity had removed ${a}`)
+        }else{
+          console.log('The cart will be 0')                                    
+        } 
+      }else{                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+        if(num + a <= 10){
+          num += a; 
+          console.log(`the quantity had added ${a}`)
+        }else{
+          console.log('The cart is full')
+        } 
+      }
+    }
+  </script>
+</body>
+</html>

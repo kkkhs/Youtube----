@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body{
+      font-family: Arial, Helvetica, sans-serif;
+    }
+    .d-button{
+      padding: 8px 15px;
+      border: none;
+      border-color: aliceblue;
+      font-weight: bold;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .d-clicked{
+      background-color: black;
+      color: white;
+    }
+
+    /* 10h */
+    .cost-input{
+      font-size: 15px;
+      padding: 10px;
+    }
+
+    .calculate-button{
+      background-color: green;
+      border: none;
+      color: white;
+      font-size: 15px;
+      padding: 12px 15px;
+      cursor: pointer;
+    }
+
+    .beRed{
+      color: red;
+    }
+
+  </style>
+</head>
+<body>
+  <hr>
+  <!-- 10f -->
+  <button class="d-button js-button" onclick="ButtonChange('.js-button');">Gaming</button>
+  <button class="d-button js-button2" onclick="ButtonChange('.js-button2');">Music</button>
+  <button class="d-button js-button3" onclick="ButtonChange('.js-button3');">Tech</button>
+
+  <!-- 10g -->
+  <hr>
+  <button class="d-button js-button11" onclick="ButtonChange2('.js-button11');">Gaming</button>
+  <button class="d-button js-button22" onclick="ButtonChange2('.js-button22');">Music</button>
+  <button class="d-button js-button33" onclick="ButtonChange2('.js-button33');">Tech</button>
+  
+  <!-- 10h -->
+  <hr>
+  <p>Amazon Shipping Calculator</p>
+  <p>Orders under $40 = +$10 shipping.</p>
+  <p>Orders over $40 = FREE shipping.</p>
+  <input type="text" placeholder="Cost of order" class="js-cost-input cost-input" onkeydown="handleCostKeyDown(event);">
+  <button class="calculate-button" onclick="CalculateTotal();">Calculator</button>
+  <p class="js-result"></p>
+
+  <script>
+    // 10f
+    function ButtonChange(selector){
+      buttonElement = document.querySelector(selector);
+      if(buttonElement.classList.contains('d-clicked')){
+        buttonElement.classList.remove('d-clicked');
+      }else{
+        buttonElement.classList.add('d-clicked');
+      }
+    }
+
+    //10g
+    function ButtonChange2(selector){
+      buttonElement = document.querySelector(selector);
+      if(buttonElement.classList.contains('d-clicked')){
+        buttonElement.classList.remove('d-clicked');
+      }else{
+        //删除前一个的类列表
+        turnOffPreButton();
+
+        buttonElement.classList.add('d-clicked');
+      }
+    }
+
+    function turnOffPreButton(){
+      let preButtonElement = document.querySelector('.d-clicked');
+      //如果存在则删除
+      if(preButtonElement){
+        preButtonElement.classList.remove('d-clicked');
+      }
+    }
+
+    // 10h
+    function handleCostKeyDown(event){
+      //回车键触发
+      if(event.key === 'Enter') CalculateTotal();
+    }
+
+    function CalculateTotal(){
+      //Number(): Sting转数字
+      let cost = Number(document.querySelector('.js-cost-input').value);
+      if(cost < 0){
+        document.querySelector('.js-result').innerHTML = `Error: cost cannot be less than $0.`;
+        document.querySelector('.js-result').classList.add('beRed');
+        return;
+      }else if(cost < 40){
+        cost += 10;
+      }
+      
+      //删除红色
+      if(document.querySelector('.js-result')){
+        document.querySelector('.js-result').classList.remove('beRed');
+      }
+
+      document.querySelector('.js-result').innerHTML = `$${cost}`
+    }
+  </script>
+</body>
+</html>

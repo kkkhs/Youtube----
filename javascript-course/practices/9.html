@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+    <!-- 9g -->
+    <input class="inputNum" type="text" placeholder="Cost" onkeydown="enter(event)">
+    <button onclick="calculateNum();">Calculate</button>
+    <p class="result"></p>
+
+    <!-- 9h -->
+    <hr>
+    <input class="inputString" type="text" onkeyup="updateString();">
+    <p class="h-result"></p>
+
+    <!-- 9i -->
+    <hr>
+    <p>Cart Quantity</p>
+    <button onclick="console.log(`the quantity is: ${num}`)">Show Quantity</button>
+    <button onclick="
+      if(num + 1 <= 10){
+        num ++; 
+        console.log('Added')
+      }else{
+        console.log('The cart is full')
+      }
+      updateCartQuantity();
+    ">
+      Add to Cart
+    </button>
+
+    <button onclick="
+      if(num + 2 <= 10){
+        num += 2; 
+        console.log('the quantity had added 2')
+      }else{
+        console.log('The cart is full')
+      }
+      updateCartQuantity();
+    ">
+      +2
+    </button>
+    <button onclick="
+      if(num + 3 <= 10){
+        num += 3; 
+        console.log('the quantity had added 3')
+      }else{
+        console.log('The cart is full')
+      } 
+      updateCartQuantity();
+    ">
+      +3
+    </button>
+
+    <button onclick="
+      if(num - 2 >= 0){
+        num -= 2; 
+        console.log('the quantity had removed 2')
+      }else{
+        console.log('The cart will be 0')
+      } 
+      updateCartQuantity();
+    ">
+      -2
+    </button>
+
+    <button onclick="
+      if(num - 3 >= 0){
+        num -= 3; 
+        console.log('the quantity had removed 3')
+      }else{
+        console.log('The cart will be 0')
+      } 
+      updateCartQuantity();
+    ">
+      -3
+    </button>
+    <button onclick="num = 0;  document.querySelector('.i-result').innerHTML = 'the quantity had reset!';" >Reset Cart</button>
+    <p class="i-result"></p>
+
+    <!-- 9j -->
+    <hr>
+    <p>Calculator</p>
+    <p class="show-p"></p>
+    <p>
+      <button onclick="calculate('1');">1</button>
+      <button onclick="calculate('2');">2</button>
+      <button onclick="calculate('3');">3</button>
+      <button onclick="calculate(' + ');">+</button>
+    </p>
+    <p>
+      <button onclick="calculate('4');">4</button>
+      <button onclick="calculate('5');">5</button>
+      <button onclick="calculate('6');">6</button>
+      <button onclick="calculate(' - ');">-</button>
+    </p>
+    <p>
+      <button onclick="calculate('7');">7</button>
+      <button onclick="calculate('8');">8</button>
+      <button onclick="calculate('9');">9</button>
+      <button onclick="calculate(' * ');">*</button>
+    </p>
+    <p>
+      <button onclick="calculate('0');">0</button>
+      <button onclick="calculate('.');">.</button>
+      <button onclick="calculation = eval(calculation); showNum();">=</button>
+      <button onclick="calculate(' / ');">/</button>
+    </p>
+    <button onclick="calculation = '';showNum();;">clear</button>
+  
+    
+  <script>
+    // 9g
+    function enter(envent){
+      if(event.key === 'Enter'){
+        calculateNum();
+      }
+    }
+
+    function calculateNum(){
+      let num = Number(document.querySelector('.inputNum').value);
+      if(num < 10){
+        document.querySelector('.result').innerHTML = `$${((num * 100 + 1000)/100)}`;
+      }else{
+        document.querySelector('.result').innerHTML = `$${num}`;
+      }
+    }
+
+    //9h
+    function updateString(){
+      let str = document.querySelector('.inputString').value;
+      //console.log(str);
+      document.querySelector('.h-result').innerHTML = str;
+    }
+
+    //9i
+    let num = 0;
+    function updateCartQuantity(){
+      document.querySelector('.i-result').innerHTML = `Cart quantity: ${num}`;
+    }
+
+    //9j
+    let calculation = '';
+
+    function calculate(x){
+      calculation += x;
+      showNum();
+    }
+
+    function showNum(){
+      document.querySelector('.show-p').innerHTML = calculation
+    }
+  </script>
+</body>
+</html>

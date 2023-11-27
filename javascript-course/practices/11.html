@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+
+  <script>
+    // 11l 11m
+    function minMax(nums){
+      const result = {'min':null, 'max':null};
+      if(nums[0]){
+        let max = nums[0];
+        let min = nums[0];
+        for(let i = 0; i < nums.length; i ++){
+          if(nums[i] > max) max = nums[i];
+          if(nums[i] < min) min = nums[i];
+        }
+        result['min'] = min;
+        result['max'] = max;
+      }
+      console.log(result);
+    }
+    minMax([1,7,8,9,10,-1]);
+
+    //11n
+    function countWords(words){
+      const result = {};
+      for(let i = 0; i < words.length; i ++){
+        if(result[words[i]]) result[words[i]] ++;
+        else result[words[i]] = 1;
+      }
+      console.log(result)
+    }
+    countWords(['a', 'b', 'c', 'a', 'c'])
+
+    // 11v
+    for(let i = 1; i <= 20; i ++){
+      if(i % 3 === 0 && i % 5 === 0){
+        console.log('FizzBuzz');
+      }else if(i % 3 === 0){
+        console.log('Fizz');
+      }else if (i % 5 === 0){
+        console.log('Buzz');
+      }else{
+        console.log(i)
+      }
+    }
+
+    //11w
+    function findIndex(array, word){
+      for(let i = 0; i < array.length; i ++){
+        if(array[i] === word){
+          return i;
+          break;
+        }
+      }
+      return -1;
+    }
+
+    function unique(array){
+      let resultArray = []
+      for(let i = 0; i < array.length; i ++){
+        if(findIndex(resultArray, array[i]) === -1){
+          resultArray.push(array[i]);
+        }
+      }
+      return resultArray;
+    }
+    console.log(unique(['green','red','green','red']));
+
+    //11x
+  </script>
+</body>
+</html>

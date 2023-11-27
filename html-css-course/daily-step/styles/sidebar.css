@@ -1,0 +1,75 @@
+@media (max-width:1200px) {
+  .sidebar{
+    position: fixed;
+    background-color: white;
+    left: 0;
+    bottom: 0;
+    top: 55px;
+    width: 72px;
+    z-index: 200;
+    padding-top: 5px;
+  }
+  .sidebar-link{
+    height: 74px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center ;
+    align-items: center;
+    cursor: pointer;
+  }
+  
+  .sidebar-link:hover{
+    background-color: rgb(235, 235, 235);
+  }
+  
+  /* css选择器 */
+  .sidebar-link img{
+    height: 24px;
+    margin-bottom: 4px;
+  }
+  
+  .sidebar-link div{
+    font-size: 10px;
+  }
+}
+
+
+@media (min-width:1200.1px) {
+  .sidebar{
+    position: fixed;
+    background-color: white;
+    left: 0;
+    bottom: 0;
+    top: 55px;
+    width: 200px;
+    z-index: 200;
+    padding-top: 5px;
+  }
+  .sidebar-link{
+    height: 74px;
+    display: flex;
+    flex-direction: row;
+    justify-content: start ;
+    align-items: center;
+    cursor: pointer;
+    padding-left: 25px;
+  }
+  
+  .sidebar-link:hover{
+    background-color: rgb(235, 235, 235);
+  }
+  
+  /* css选择器 */
+  .sidebar-link img{
+    height: 24px;
+    margin-bottom: 4px;
+  }
+  
+  .sidebar-link div{
+    font-size: 18px;
+    margin-left: 10px
+  }
+  body{
+    padding-left: 220px;
+  }
+}

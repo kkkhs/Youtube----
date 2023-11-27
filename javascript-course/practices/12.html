@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  
+  <!-- 12f -->
+  <button class="js-add-button" onclick="showMsg();">Add to cart</button>
+  <p class="p-msg"></p>
+
+  <!-- 12h -->
+  <button onclick="messages++;">Add</button>
+  <button onclick="if(messages > 0) messages --;">Remove</button>
+
+  <script>
+    // 12f
+    let setTimeoutId;
+    function showMsg(){
+      const msgElement = document.querySelector('.p-msg');
+      msgElement.innerHTML = 'Added';
+
+      if(setTimeoutId){
+        clearInterval(setTimeoutId);
+      }
+      setTimeoutId = setTimeout(function(){
+        msgElement.innerHTML = '';
+      }, 2000);
+    }
+
+    //12g 12h
+    let messages = 2;
+    let setIntervalId;
+    setIntervalId = setInterval(function(){
+      if(messages >= 0){
+        document.title = `(${messages})New messages`;
+      }
+    }, 1000);
+    setInterval(function(){
+      document.title = `App`;
+    }, 2000);
+
+  </script>
+</body>
+</html>
