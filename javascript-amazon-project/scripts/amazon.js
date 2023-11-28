@@ -2,7 +2,7 @@ import { cart } from "../data/cart.js";
 import { products } from "../data/products.js";
 
 let productsHTML = '';
-let timeOutId = null;
+const addedMsgTimeouts = {};
 
 products.forEach((product) => {
   productsHTML += `
@@ -59,48 +59,61 @@ products.forEach((product) => {
 
 document.querySelector('.js-products-grid').innerHTML = productsHTML;
 
+function addToCart(productId){
+  let matchingItem;
+
+  //检验购物车中是否存在
+  cart.forEach((item) => {
+    if(productId === item.productId){
+      matchingItem = item;
+    }
+  })
+
+  if(matchingItem){
+    matchingItem.quantity ++;
+  }else{
+    cart.push({
+      productId: productId,
+      quantity: 1
+    })
+  }
+}
+
+function updateCartQuantity(){
+  //计算购物车总数
+  let cartQuantity = 0;
+  cart.forEach((item) =>{
+    cartQuantity += item.quantity;
+  })
+
+  //更新显示的购物车数量
+  document.querySelector('.js-cart-quantity').innerHTML = cartQuantity;
+}
+
+function showAdded(productId){
+  document.querySelector(`.js-added-to-cart-${productId}`).classList.add('show');
+
+  //如果直接删除的前一个ID可能是别的按钮
+  const previousTimeoutId = addedMsgTimeouts[productId];
+  if(previousTimeoutId){
+    clearTimeout(previousTimeoutId);
+  }
+
+  const timeOutId = setTimeout(() => {
+    document.querySelector(`.js-added-to-cart-${productId}`).classList.remove('show');
+  },2000);
+  addedMsgTimeouts[productId] = timeOutId;
+}
+
 document.querySelectorAll('.js-add-to-cart').forEach((button) => {
     button.addEventListener('click', () => {
       //获取添加的data属性值
       const productId = button.dataset.productId;
       
-      let matchingItem;
+      addToCart(productId);
 
-      //检验购物车中是否存在
-      cart.forEach((item) => {
-        if(productId === item.productId){
-          matchingItem = item;
-        }
-      })
-
-      if(matchingItem){
-        matchingItem.quantity ++;
-      }else{
-        cart.push({
-          productId: productId,
-          quantity: 1
-        })
-      }
-
-      //计算购物车总数
-      let cartQuantity = 0;
-      cart.forEach((item) =>{
-        cartQuantity += item.quantity;
-      })
-
-      //更新显示的购物车数量
-      document.querySelector('.js-cart-quantity').innerHTML = cartQuantity;
-
-      document.querySelector(`.js-added-to-cart-${productId}`).classList.add('show');
-
+      updateCartQuantity();
       
-      if(timeOutId){
-        clearTimeout(timeOutId);
-        timeOutId = null;
-      }
-      timeOutId = setTimeout(() => {
-        document.querySelector(`.js-added-to-cart-${productId}`).classList.remove('show');
-      },2000);
-
+      showAdded(productId);
     });
   });
