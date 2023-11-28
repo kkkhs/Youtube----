@@ -1,5 +1,5 @@
-
 let productsHTML = '';
+let timeOutId = null;
 
 products.forEach((product) => {
   productsHTML += `
@@ -42,7 +42,7 @@ products.forEach((product) => {
 
       <div class="product-spacer"></div>
 
-      <div class="added-to-cart">
+      <div class="added-to-cart js-added-to-cart-${product.id}">
         <img src="images/icons/checkmark.png">
         Added
       </div>
@@ -88,6 +88,16 @@ document.querySelectorAll('.js-add-to-cart').forEach((button) => {
       //更新显示的购物车数量
       document.querySelector('.js-cart-quantity').innerHTML = cartQuantity;
 
+      document.querySelector(`.js-added-to-cart-${productId}`).classList.add('show');
+
+      
+      if(timeOutId){
+        clearTimeout(timeOutId);
+        timeOutId = null;
+      }
+      timeOutId = setTimeout(() => {
+        document.querySelector(`.js-added-to-cart-${productId}`).classList.remove('show');
+      },2000);
 
     });
   });
