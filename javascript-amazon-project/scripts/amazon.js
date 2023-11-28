@@ -47,7 +47,7 @@ products.forEach((product) => {
         Added
       </div>
 
-      <button class="add-to-cart-button button-primary">
+      <button class="add-to-cart-button button-primary js-add-to-cart" data-product-id="${product.id}">
         Add to Cart
       </button>
     </div>
@@ -55,3 +55,30 @@ products.forEach((product) => {
 });
 
 document.querySelector('.js-products-grid').innerHTML = productsHTML;
+
+document.querySelectorAll('.js-add-to-cart').forEach((button) => {
+    button.addEventListener('click', () => {
+      //获取添加的data属性值
+      const productId = button.dataset.productId;
+      
+      let matchingItem;
+
+      //检验购物车中是否存在
+      cart.forEach((item) => {
+        if(productId === item.productId){
+          matchingItem = item;
+        }
+      })
+
+      if(matchingItem){
+        matchingItem.quantity ++;
+      }else{
+        cart.push({
+          productId: productId,
+          quantity: 1
+        })
+      }
+      
+      console.log(cart);
+    });
+  });
