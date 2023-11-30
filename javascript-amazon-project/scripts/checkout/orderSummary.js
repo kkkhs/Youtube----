@@ -122,11 +122,8 @@ export function renderOrderSummary(){
       const productId = link.dataset.productId;
       removeFromCart(productId);
 
-      const container = document.querySelector(`.js-cart-item-container-${productId}`);
-      //从界面移除HTML
-      container.remove();
-
       renderPaymentSummary();
+      renderOrderSummary();
       updateCheckOutQuantity();
     });
   });
