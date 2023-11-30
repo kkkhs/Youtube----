@@ -3,6 +3,7 @@ import { products, getProduct } from "../../data/products.js";
 import { formatCurrency } from "../utils/money.js";
 import dayjs from "https://unpkg.com/dayjs@1.11.10/esm/index.js";
 import { deliveryOptions, getDeliveryOption } from "../../data/deliveryOptions.js";
+import { renderPaymentSummary } from "./paymentSummary.js";
 
 export function renderOrderSummary(){
 
@@ -124,6 +125,8 @@ export function renderOrderSummary(){
       const container = document.querySelector(`.js-cart-item-container-${productId}`);
       //从界面移除HTML
       container.remove();
+
+      renderPaymentSummary();
       updateCheckOutQuantity();
     });
   });
@@ -154,7 +157,8 @@ export function renderOrderSummary(){
       const newQuantity = Number(container.querySelector('.quantity-input').value);
       if(typeof newQuantity ==='number' && newQuantity > 0 && newQuantity < 1000){
         updateQuantity(productId, newQuantity);
-        //更新Quantity
+        //更新
+        renderPaymentSummary();
         renderOrderSummary();
       } 
       
@@ -177,11 +181,16 @@ export function renderOrderSummary(){
     document.querySelector('.js-checkout-quantity').innerHTML = `${cartQuantity} items`;
   };
 
+
+  //Delivery Options
   document.querySelectorAll('.js-delivery-option').forEach((element) => {
     element.addEventListener('click', () => {
       const {productId, deliveryOptionId} = element.dataset;
       updateDeliveryOption(productId, deliveryOptionId);
+
+      //更新
       renderOrderSummary();
+      renderPaymentSummary();
     });
   });
 
