@@ -9,7 +9,7 @@ export let cart = JSON.parse(localStorage.getItem('cart'))
 }];
 
 //本地存储
-function saveToStorage(){
+export function saveToStorage(){
   localStorage.setItem('cart', JSON.stringify(cart));
 }
 
@@ -46,5 +46,24 @@ export function removeFromCart(productId){
 
   //更新新的购物车
   cart = newCart;
+  saveToStorage();
+}
+
+export function calculateCartQuantity(){
+  //计算购物车总数
+  let cartQuantity = 0;
+  cart.forEach((cartItem) =>{
+    cartQuantity += cartItem.quantity;
+  });
+  return cartQuantity;
+}
+
+export function updateQuantity(productId, newQuantity){
+  cart.forEach((cartItem) => {
+    if(cartItem.productId === productId){
+      cartItem.quantity = newQuantity;
+    }
+  });
+  
   saveToStorage();
 }
