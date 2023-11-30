@@ -1,4 +1,4 @@
-import { cart, removeFromCart } from "../data/cart.js";
+import { cart, removeFromCart, calculateCartQuantity, updateQuantity } from "../data/cart.js";
 import { products } from "../data/products.js";
 import { formatCurrency } from "./utils/money.js";
 
@@ -39,9 +39,12 @@ cart.forEach((cartItem) => {
           <span>
             Quantity: <span class="quantity-label">${cartItem.quantity}</span>
           </span>
-          <span class="update-quantity-link link-primary">
+          <span class="update-quantity-link link-primary js-update-link" data-product-id="${matchingProduct.id}">
             Update
           </span>
+          <input class="quantity-input">
+          <span class="link-primary save-quantity-link" data-product-id="${matchingProduct.id}">Save</span>
+          
           <span class="delete-quantity-link link-primary js-delete-link" data-product-id="${matchingProduct.id}">
             Delete
           </span>
@@ -98,7 +101,9 @@ cart.forEach((cartItem) => {
 });
 
 document.querySelector('.js-order-summary').innerHTML = cartSummaryHTML;
+updateCheckOutQuantity();
 
+//删除link
 document.querySelectorAll('.js-delete-link').forEach((link) => {
   link.addEventListener('click', () => {
     const productId = link.dataset.productId;
@@ -107,5 +112,55 @@ document.querySelectorAll('.js-delete-link').forEach((link) => {
     const container = document.querySelector(`.js-cart-item-container-${productId}`);
     //从界面移除HTML
     container.remove();
+    updateCheckOutQuantity();
   });
 });
+
+//update-link
+document.querySelectorAll('.js-update-link').forEach((link) => {
+  link.addEventListener('click', () => {
+    const productId = link.dataset.productId;
+
+    const container = document.querySelector(`.js-cart-item-container-${productId}`);
+    
+    //显示输入框和Save, 隐去Update
+    container.querySelector('.quantity-input').classList.add('is-editing-quantity');
+    container.querySelector('.save-quantity-link').classList.add('is-editing-quantity');
+    container.querySelector('.js-update-link').classList.add('is-not-editing');
+
+    updateCheckOutQuantity();
+  });
+});
+
+//Save-link
+document.querySelectorAll('.save-quantity-link').forEach((link) => {
+  link.addEventListener('click', () => {
+    const productId = link.dataset.productId;
+
+    const container = document.querySelector(`.js-cart-item-container-${productId}`);
+
+    const newQuantity = Number(container.querySelector('.quantity-input').value);
+    if(typeof newQuantity ==='number' && newQuantity > 0 && newQuantity < 1000){
+      updateQuantity(productId, newQuantity);
+      //更新Quantity
+      container.querySelector('.quantity-label').innerHTML = newQuantity;
+    } 
+    
+    //隐藏输入框和Save, 显示Update
+    container.querySelector('.quantity-input').classList.remove('is-editing-quantity');
+    container.querySelector('.save-quantity-link').classList.remove('is-editing-quantity');
+    container.querySelector('.js-update-link').classList.remove('is-not-editing');
+
+    container.querySelector('.quantity-input').innerHTML = '';
+    updateCheckOutQuantity();
+  });
+});
+
+//刷新顶部checkOut数量
+function updateCheckOutQuantity(){
+  //计算购物车总数
+  let cartQuantity =  calculateCartQuantity();
+
+  //更新显示的checkOut数量
+  document.querySelector('.js-checkout-quantity').innerHTML = `${cartQuantity} items`;
+};
